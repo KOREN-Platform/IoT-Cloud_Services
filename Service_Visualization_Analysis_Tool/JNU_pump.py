@@ -11,7 +11,7 @@ import time
 
 import sys
 sys.path.insert(0,'/home/choijiho/choi')
-from KU_data import c_messageJSON
+from JNU_data import c_messageJSON
 
 ##########################################################################################
 local_tz = pytz.timezone('Asia/Seoul') # use your local timezone name here
@@ -31,15 +31,23 @@ def get_ifdb(db, host='localhost', port=8086, user='root', passwd='root'):
 
 ##########################################################################################
 def my_test(ifdb):
-	tablename = "KU_2_2"
-	deviceid="KU_Device"
+	tablename = "JNU_2_0"
+	deviceid="JNU_Device"
 	messageJSON = c_messageJSON(deviceid)
 
 	json_body = [
 	]
+	status= 'status'
 	lat='lat'
-	lan='lan'
-	dust="dust"
+	lon='lon'
+	ratio = 'ratio'
+	concentration = 'concentration'
+	low_pulse_occupancy = 'low_pulse_occupancy'
+	alcohol_gas ='alcohol_gas'
+	co_gas ='co_gas'
+	temp='temp'
+	light='light'
+	
 
 	point = {
 		"measurement": tablename,
@@ -48,24 +56,38 @@ def my_test(ifdb):
 			"device_ID":messageJSON.deviceid,
 		},
 		"fields": {
-			
+			status :messageJSON.status,
 			lat :messageJSON.lat,
-			lan:messageJSON.lan,
-			dust:messageJSON.dust,
+			lon:messageJSON.lon,
+			ratio:messageJSON.ratio,
+			concentration:messageJSON.concentration,
+			low_pulse_occupancy : messageJSON.low_pulse_occupancy,
+			alcohol_gas:messageJSON.alcohol_gas,
+			co_gas:messageJSON.co_gas,
+			temp:messageJSON.temp,
+			light:messageJSON.light,
+
 		},
 		"time": None,
 	}
 	
 	while True:
 		messageJSON.random_data()
-		dt = datetime.now() 
+		dt = datetime.now()
 		ldt = utc_to_local(dt)
 		print "UTC now=<%s> local now=<%s>" % (dt, ldt)
 		np = deepcopy(point)
 		np['fields'][lat] =messageJSON.lat
-		np['fields'][lan] =messageJSON.lan 
-		np['fields'][dust] =messageJSON.dust
-
+		np['fields'][lon] =messageJSON.lon 
+		np['fields'][status] =messageJSON.status
+		np['fields'][ratio]=messageJSON.ratio
+		np['fields'][concentration]=messageJSON.concentration
+		np['fields'][low_pulse_occupancy]=messageJSON.low_pulse_occupancy
+		np['fields'][alcohol_gas]=messageJSON.alcohol_gas
+		np['fields'][co_gas]=messageJSON.co_gas
+		np['fields'][temp]=messageJSON.temp
+		np['fields'][light]=messageJSON.light
+		
 		np['time'] = dt
 		json_body.append(np)
 #		dt += timedelta(seconds=1)

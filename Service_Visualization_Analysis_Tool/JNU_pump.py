@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 #coding=utf-8
-
 from datetime import datetime, timedelta
 import pprint
 from influxdb import InfluxDBClient
@@ -8,9 +7,7 @@ from copy import deepcopy
 import pytz
 import random
 import time
-
 import sys
-sys.path.insert(0,'/home/choijiho/choi')
 from JNU_data import c_messageJSON
 
 ##########################################################################################

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #coding=utf-8
+
 from datetime import datetime, timedelta
 import pprint
 from influxdb import InfluxDBClient
@@ -7,7 +8,9 @@ from copy import deepcopy
 import pytz
 import random
 import time
+
 import sys
+sys.path.insert(0,'/home/sohyun')
 from JNU_data import c_messageJSON
 
 ##########################################################################################
@@ -28,7 +31,7 @@ def get_ifdb(db, host='localhost', port=8086, user='root', passwd='root'):
 
 ##########################################################################################
 def my_test(ifdb):
-	tablename = "JNU_2_0"
+	tablename = "JNU_2_1"
 	deviceid="JNU_Device"
 	messageJSON = c_messageJSON(deviceid)
 
@@ -37,9 +40,7 @@ def my_test(ifdb):
 	status= 'status'
 	lat='lat'
 	lon='lon'
-	ratio = 'ratio'
-	concentration = 'concentration'
-	low_pulse_occupancy = 'low_pulse_occupancy'
+	dust='dust'
 	alcohol_gas ='alcohol_gas'
 	co_gas ='co_gas'
 	temp='temp'
@@ -56,9 +57,7 @@ def my_test(ifdb):
 			status :messageJSON.status,
 			lat :messageJSON.lat,
 			lon:messageJSON.lon,
-			ratio:messageJSON.ratio,
-			concentration:messageJSON.concentration,
-			low_pulse_occupancy : messageJSON.low_pulse_occupancy,
+			dust:messageJSON.dust,
 			alcohol_gas:messageJSON.alcohol_gas,
 			co_gas:messageJSON.co_gas,
 			temp:messageJSON.temp,
@@ -77,9 +76,7 @@ def my_test(ifdb):
 		np['fields'][lat] =messageJSON.lat
 		np['fields'][lon] =messageJSON.lon 
 		np['fields'][status] =messageJSON.status
-		np['fields'][ratio]=messageJSON.ratio
-		np['fields'][concentration]=messageJSON.concentration
-		np['fields'][low_pulse_occupancy]=messageJSON.low_pulse_occupancy
+		np['fields'][dust]= messageJSON.dust
 		np['fields'][alcohol_gas]=messageJSON.alcohol_gas
 		np['fields'][co_gas]=messageJSON.co_gas
 		np['fields'][temp]=messageJSON.temp
@@ -96,7 +93,7 @@ def my_test(ifdb):
 
 ##########################################################################################
 def do_test():
-	ifdb = get_ifdb(db='resource_2_0')
+	ifdb = get_ifdb(db='resource_2_1')
 	my_test(ifdb)
 
 ##########################################################################################

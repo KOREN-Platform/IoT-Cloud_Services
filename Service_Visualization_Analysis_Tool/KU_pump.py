@@ -10,7 +10,7 @@ import random
 import time
 
 import sys
-sys.path.insert(0,'/home/choijiho/choi')
+sys.path.insert(0,'/home/sohyun')
 from KU_data import c_messageJSON
 
 ##########################################################################################
@@ -31,7 +31,7 @@ def get_ifdb(db, host='localhost', port=8086, user='root', passwd='root'):
 
 ##########################################################################################
 def my_test(ifdb):
-	tablename = "KU_2_2"
+	tablename = "KU_2_1"
 	deviceid="KU_Device"
 	messageJSON = c_messageJSON(deviceid)
 
@@ -77,7 +77,7 @@ def my_test(ifdb):
 
 ##########################################################################################
 def do_test():
-	ifdb = get_ifdb(db='resource_2_0')
+	ifdb = get_ifdb(db='resource_2_1')
 	my_test(ifdb)
 
 ##########################################################################################

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>NIA Drone Project</title>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="/dist/network.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+        
+        <button onClick= "moving_arrowChange();"> change to arrow </button>
+        <button onClick= "moving_dotChange();"> change to moving-dot </button>
+        <button onClick= "lineChange();"> change to line </button>
+        
+        <div id="mynetwork"></div>
+        <div id="info"></div>
+
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="/dist/network.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+
+            var nodesTable = null;
+            var linksTable = null;
+            var network = null;
+            var options = null;
+
+            var moveX = 330;
+            var moveY =80;
+
+
+
+            var DIR = 'img/';
+
+            google.load('visualization', '1');
+
+            google.setOnLoadCallback(drawVisualization);
+
+
+
+            function drawVisualization() {
+
+                nodesTable = new google.visualization.DataTable();
+
+                nodesTable.addColumn('number', 'id');
+                nodesTable.addColumn('string', 'text');
+                nodesTable.addColumn('string', 'image');
+                nodesTable.addColumn('string', 'style');
+                nodesTable.addColumn('number', 'x');
+                nodesTable.addColumn('number', 'y');
+
+
+                linksTable = new google.visualization.DataTable();
+
+                linksTable.addColumn('number', 'from');
+                linksTable.addColumn('number', 'to');
+                linksTable.addColumn('number', 'id');
+                linksTable.addColumn('string', 'style');
+                linksTable.addColumn('string', 'color');
+
+
+                 nodesTable.addRow([1, 'KOREN', DIR + 'cloud.PNG', 'image', 500 + moveX, 350 + moveY]);
+
+                nodesTable.addRow([2, 'TYPE O - KU', DIR + 'TYPEO-hard.PNG', 'image', 300 + moveX, 300 + moveY]);
+                nodesTable.addRow([3, 'TYPE O - GIST', DIR + 'TYPEO-hard.PNG', 'image', 500 + moveX, 500 + moveY]);
+                nodesTable.addRow([4, 'TYPE O - JNU', DIR + 'TYPEO-hard.PNG', 'image', 700 + moveX, 300 + moveY]);
+
+
+
+                nodesTable.addRow([5, 'KU SITE', DIR + 'university.png', 'image', 150 + moveX, 400 + moveY]);
+                nodesTable.addRow([6, 'GIST', DIR + 'university.png', 'image', 450 + moveX, 650 + moveY]);
+
+                nodesTable.addRow([7, 'JNU SITE', DIR + 'university.png', 'image', 850 + moveX, 400 + moveY]);
+
+                nodesTable.addRow([8, 'Phone', DIR + 'Iphone.PNG', 'image', 130 + moveX, 550 + moveY]);
+                nodesTable.addRow([9, 'video', DIR + 'video.PNG', 'image', 990 + moveX, 400 + moveY]);
+                nodesTable.addRow([10, 'Drone', DIR + 'drone.PNG', 'image', 950 + moveX, 300 + moveY]);
+
+                nodesTable.addRow([11, 'Sensor1', DIR + 'sensor.png', 'image', 20 + moveX, 480 + moveY]);
+                nodesTable.addRow([12, 'Sensor2', DIR + 'sensor.png', 'image', 10 + moveX, 580 + moveY]);
+                nodesTable.addRow([13, 'Sensor3', DIR + 'sensor.png', 'image', 35 + moveX, 670 + moveY]);
+
+                nodesTable.addRow([14, 'DRONE_TEMP', DIR + 'sensor.png', 'image', 900 + moveX, 150 + moveY]);
+                nodesTable.addRow([15, 'DRONE_HUMID', DIR + 'sensor.png', 'image', 980 + moveX, 120 + moveY]);
+                nodesTable.addRow([16, 'DRONE_LIGHT', DIR + 'sensor.png', 'image', 1060 + moveX, 150 + moveY]);
+
+                nodesTable.addRow([17, 'DEMO SITE', DIR + 'demo.png', 'image', 500 + moveX, 170 + moveY]);
+                nodesTable.addRow([18, 'Demo Drone', DIR + 'drone.PNG', 'image', 400 + moveX, 20 + moveY]);
+                nodesTable.addRow([19, 'Demo Phone', DIR + 'Iphone.PNG', 'image', 580 + moveX, 20 + moveY]);
+
+
+                nodesTable.addRow([20, 'DRONE_AIRQUALITY', DIR + 'sensor.png', 'image', 1100 + moveX, 210 + moveY]);
+
+                nodesTable.addRow([21, 'Raspberry Pi', DIR + 'Raspberry.png', 'image', 950 + moveX, 520 + moveY]);
+                nodesTable.addRow([22, 'RASP_TEMP', DIR + 'sensor.png', 'image', 900 + moveX, 650 + moveY]);
+                nodesTable.addRow([23, 'RASP_HUMID', DIR + 'sensor.png', 'image', 980 + moveX, 680 + moveY]);
+                nodesTable.addRow([24, 'RASP_LIGHT', DIR + 'sensor.png', 'image', 1060 + moveX, 650 + moveY]);
+                nodesTable.addRow([25, 'RASP_AIRQUALITY', DIR + 'sensor.png', 'image', 1100 + moveX, 590 + moveY]);
+
+
+                nodesTable.addRow([26, 'DRONE_GPS', DIR + 'sensor.png', 'image', 1100 + moveX, 270 + moveY]);
+
+                nodesTable.addRow([27, 'RASP_GPS', DIR + 'sensor.png', 'image', 1100 + moveX, 520 + moveY]);
+
+
+
+                linksTable.addRow([2, 1, 1, 'line', undefined]);
+                linksTable.addRow([3, 1, 2, 'line', undefined]);
+                linksTable.addRow([4, 1, 3, 'line', undefined]);
+                linksTable.addRow([5, 2, 4, 'line', undefined]);
+                linksTable.addRow([6, 3, 5, 'line', undefined]);
+                linksTable.addRow([7, 4, 6, 'line', undefined]);
+                linksTable.addRow([8, 5, 7, 'line', undefined]);
+                linksTable.addRow([9, 7, 8, 'line', undefined]);
+                linksTable.addRow([10, 7, 9, 'line', undefined]);
+                linksTable.addRow([11, 8, 10, 'line', undefined]);
+                linksTable.addRow([12, 8, 11, 'line', undefined]);
+                linksTable.addRow([13, 8, 12, 'line', undefined]);
+                linksTable.addRow([14, 10, 13, 'line', undefined]);
+                linksTable.addRow([15, 10, 14, 'line', undefined]);
+                linksTable.addRow([16, 10, 15, 'line', undefined]);
+                linksTable.addRow([17, 1, 16,'line', undefined]);
+                linksTable.addRow([18, 17, 17,'line', undefined]);
+                linksTable.addRow([19, 17, 18,'line', undefined]);
+
+  	        linksTable.addRow([20, 10, 19, 'line', undefined]);
+                linksTable.addRow([21, 7, 20, 'line', undefined]);
+                linksTable.addRow([22, 21, 21, 'line', undefined]);
+                linksTable.addRow([23, 21, 22, 'line', undefined]);
+                linksTable.addRow([24, 21, 23, 'line', undefined]);
+                linksTable.addRow([25, 21, 24, 'line', undefined]);                
+                linksTable.addRow([26, 10, 25, 'line', undefined]);
+                linksTable.addRow([27, 21, 26, 'line', undefined]);
+
+
+
+                options = {
+                   
+                    'width': '1950px',
+                    'height': '1000px',
+                          
+ 		'links': {
+           		 'width': 2.5
+       			   }
+                };
+
+                network = new links.Network(document.getElementById('mynetwork'));
+                
+                google.visualization.events.addListener(network, 'select', onselect);
+                
+                network.draw(nodesTable, linksTable, options);
+                
+
+            }
+
+
+
+              $(function () {
+                // socket.io 서버에 접속한다
+                var socket = io();
+                socket.emit("init", {
+                    connect: 'on'
+                });
+                // 서버로부터의 메시지가 수신되면
+		socket.on("rasp", function(data) {
+      		  console.log(data);
+      		    if(data == null) {
+			linksTable.setCell(2, 3, 'line');
+        linksTable.setCell(2, 4, 'black');
+        linksTable.setCell(5, 3, 'line');
+        linksTable.setCell(5, 4, 'black');
+        linksTable.setCell(7, 3, 'line');
+        linksTable.setCell(7, 4, 'black');
+        linksTable.setCell(8, 3, 'line');
+        linksTable.setCell(8, 4, 'black');
+        linksTable.setCell(12, 3, 'line');
+        linksTable.setCell(12, 4, 'black');
+        linksTable.setCell(13, 3, 'line');
+        linksTable.setCell(13, 4, 'black');
+        network.draw(nodesTable, linksTable, options);
+      } else {
+	linksTable.setCell(2, 3, 'moving-arrows');
+        linksTable.setCell(2, 4, 'blue');
+        linksTable.setCell(5, 3, 'moving-arrows');
+        linksTable.setCell(5, 4, 'blue');
+        linksTable.setCell(7, 3, 'moving-arrows');
+        linksTable.setCell(7, 4, 'blue');
+        linksTable.setCell(8, 3, 'moving-arrows');
+        linksTable.setCell(8, 4, 'blue');
+        linksTable.setCell(12, 3, 'moving-arrows');
+        linksTable.setCell(12, 4, 'blue');
+        linksTable.setCell(13, 3, 'moving-arrows');
+        linksTable.setCell(13, 4, 'blue');
+        network.draw(nodesTable, linksTable, options);
+      }   
+   		 });
+		
+                socket.on("rasp2", function (data) {
+                    console.log(data);
+
+                    if (data == null) {
+                    } else {
+
+
+                        if (data.temp != "null") {
+                            linksTable.setCell(20, 3, 'moving-arrows');
+                        }
+                        if (data.humidity != "null") {
+                            linksTable.setCell(21, 3, 'moving-arrows');
+
+                        }
+                        if (data.light !="null") {
+                            linksTable.setCell(22, 3, 'moving-arrows');
+
+                        }
+
+                        if (data.ratio != "null" && data.concentration != "null" && data.lowpulseoccupancy != "null") {
+                            linksTable.setCell(23, 3, 'moving-arrows');
+
+                        }
+                        if (data.latitude != "null" && data.logitude != "null") {
+                            linksTable.setCell(25, 3, 'moving-arrows');
+
+                        }
+                        
+                        network.draw(nodesTable, linksTable, options);
+                    }
+
+                }); 
+
+            });
+
+
+
+	function moving_dotChange() {
+                linksTable.setCell(9, 3, 'moving-dot');
+                linksTable.setCell(10, 3, 'moving-dot');
+                linksTable.setCell(11, 3, 'moving-dot');
+                linksTable.setCell(12, 3, 'moving-dot');
+                linksTable.setCell(13, 3, 'moving-dot');
+                linksTable.setCell(14, 3, 'moving-dot');
+                network.draw(nodesTable, linksTable, options);
+
+             
+            }
+
+
+   	function moving_arrowChange() {
+                linksTable.setCell(9, 3, 'moving-arrows');
+                linksTable.setCell(10, 3, 'moving-arrows');
+                linksTable.setCell(11, 3, 'moving-arrows');
+                linksTable.setCell(12, 3, 'moving-arrows');
+                linksTable.setCell(13, 3, 'moving-arrows');
+                linksTable.setCell(14, 3, 'moving-arrows');
+                network.draw(nodesTable, linksTable, options);
+
+
+            }
+
+ 	function lineChange() {
+                linksTable.setCell(9, 3, 'line');
+                linksTable.setCell(10, 3, 'line');
+                linksTable.setCell(11, 3, 'line');
+                linksTable.setCell(12, 3, 'line');
+                linksTable.setCell(13, 3, 'line');
+                linksTable.setCell(14, 3, 'line');
+                network.draw(nodesTable, linksTable, options);
+
+                            }
+
+        </script>
+    </body>
+</html>

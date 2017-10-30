@@ -8,12 +8,12 @@ var io = require('socket.io')(server);
 // InfluxDB
 var DB = new influx.InfluxDB({
     // single-host configuration
-    host: 'nuc',
+    host: '210.114.90.176',
     port: 8086, // optional, default 8086
     protocol: 'http', // optional, default 'http'
-    username: 'dnslabInflux',
-    password: 'dnslab',
-    database: 'dnslabdatabases'
+    username: 'id',
+    password: 'password',
+    database: 'station'
 });
 
 let raspIsOn = false;
@@ -24,12 +24,14 @@ function getBieberTweet(cb) {
 }
 
 // localhost:3000으로 서버에 접속하면 클라이언트로 index.html을 전송한다
+
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/main.html');
 });
 
 app.use('/dist/',require('express').static(path.join(__dirname,'/dist'), { maxAge: 259200000}))
 app.use('/img/',require('express').static(path.join(__dirname,'/img'), { maxAge: 259200000} ))
+app.use('/html/',require('express').static(path.join(__dirname,'/html'), { maxAge: 259200000} ))
 
 
 // connection event handler
@@ -38,8 +40,8 @@ io.on('connection', function(socket) {
 
 socket.on("init", function() {
 DB.query(`
-        select * from jnusensor
-        where time > now() - 3s
+        select * from JNU01_rasp
+        where time > now() - 5s
         order by time desc
         limit 1
       `).then(result => {
@@ -54,8 +56,8 @@ DB.query(`
       })
 
 DB.query(`
-        select * from jnusensor2
-        where time > now() - 3s
+        select * from JNU02_drone
+        where time > now() - 5s
         order by time desc
         limit 1
       `).then(result => {
@@ -74,12 +76,12 @@ DB.query(`
 var tweets = setInterval(function () {
     getBieberTweet(function (tweet) {
         DB.query(`
-        select * from jnusensor
-        where time > now() - 3s
+        select * from JNU01_rasp
+        where time > now() - 5s
         order by time desc
         limit 1
       `).then(result => {
-         console.log("jnusensor : " + raspIsOn,result[0]);
+         //console.log("jnusensor : " + raspIsOn,result[0]);
          
          if(raspIsOn && result[0] == undefined){
            socket.volatile.emit('rasp', result[0]);
@@ -97,12 +99,12 @@ var tweets = setInterval(function () {
 var tweets2 = setInterval(function () {
     getBieberTweet(function (tweet) {
         DB.query(`
-        select * from jnusensor2
-        where time > now() - 3s
+        select * from JNU02_drone
+        where time > now() - 5s
         order by time desc
         limit 1
       `).then(result => {
-         //console.log("jnusensor2 : " + raspIsOn2,result[0]);
+         console.log("jnusensor2 : " + raspIsOn2,result[0]);
 
          if(raspIsOn2 && result[0] == undefined){
            socket.volatile.emit('rasp2', result[0]);

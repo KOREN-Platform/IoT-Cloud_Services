@@ -2,6 +2,8 @@ const influx = require('influx')
 var kafka = require('kafka-node');
 
 var topic_name = process.env.TOPIC_NAME
+var where = process.env.WHERE
+
 console.log('start');
 // InfluxDB
 var DB = new influx.InfluxDB({
@@ -44,13 +46,13 @@ resourceOffset.fetch([{
             },
             fields: {
 		id : messageJSON.ID,
-          	light: messageJSON.light,
-		temp: messageJSON.temp,
+          	light: where == 'JNU' ? messageJSON.light : 0,
+		temp: where == 'JNU' ?  messageJSON.temp : 0,
 		latitude: messageJSON.latitude,
 		longitude: messageJSON.longitude,
 		dust: messageJSON.dust,
-		alcohol_gas: messageJSON.alcohol_gas,
-		co_gas: messageJSON.co_gas
+		alcohol_gas: where == 'JNU' ? messageJSON.alcohol_gas : 0,
+		co_gas: where == 'JNU' ? messageJSON.co_gas : 0
             },
         }])
         console.log(messageJSON);

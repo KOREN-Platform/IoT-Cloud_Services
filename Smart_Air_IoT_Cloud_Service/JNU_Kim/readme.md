@@ -1,1 +1,0 @@
-JNU Team (Professor Kim)

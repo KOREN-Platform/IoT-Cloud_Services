@@ -20,7 +20,7 @@
 
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript" src="../dist/network.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript">
 
@@ -65,7 +65,9 @@
                 nodesTable.addRow([2, 'TYPE O - KU', DIR + 'TYPEO-hard.PNG', 'image', 300 + moveX, 350 + moveY]);
                 nodesTable.addRow([3, 'TYPE O - GIST', DIR + 'TYPEO-hard.PNG', 'image', 500 + moveX, 500 + moveY]);
                 nodesTable.addRow([4, 'TYPE O - JNU', DIR + 'TYPEO-hard.PNG', 'image', 780 + moveX, 400 + moveY]);
-                nodesTable.addRow([6, 'GIST', DIR + 'university.png', 'image', 450 + moveX, 650 + moveY]);
+                nodesTable.addRow([5, ' ', DIR + 'TYPEO-hard.PNG', 'image',  4000+ moveX, 4400 + moveY]);
+
+
 
 
 /////////////
@@ -77,18 +79,30 @@
 
 ///////////////JNU_DORNE_SENSOR
                 nodesTable.addRow([14, 'DRONE_TEMP', DIR + 'sensor.png', 'image', 900 + moveX, 150 + moveY]);
-                nodesTable.addRow([15, 'DRONE_HUMID', DIR + 'sensor.png', 'image', 980 + moveX, 120 + moveY]);
+                nodesTable.addRow([15, 'DRONE_DUST', DIR + 'sensor.png', 'image', 980 + moveX, 120 + moveY]);
                 nodesTable.addRow([16, 'DRONE_LIGHT', DIR + 'sensor.png', 'image', 1060 + moveX, 150 + moveY]);
-                nodesTable.addRow([20, 'DRONE_AIRQUALITY', DIR + 'sensor.png', 'image', 1100 + moveX, 210 + moveY]);
+                nodesTable.addRow([20, 'DRONE_ALCOHOL_GAS', DIR + 'sensor.png', 'image', 1100 + moveX, 210 + moveY]);
                 nodesTable.addRow([26, 'DRONE_GPS', DIR + 'sensor.png', 'image', 1100 + moveX, 270 + moveY]);
 
+
+
+///////////GIST에 있는 라즈베리파이
+
+                nodesTable.addRow([21, 'Raspberry Pi', DIR + 'Raspberry.png', 'image', 550 + moveX, 605 + moveY]);
+                nodesTable.addRow([22, 'RASP_TEMP', DIR + 'sensor.png', 'image', 550 + moveX, 710 + moveY]);
+                nodesTable.addRow([23, 'RASP_DUST', DIR + 'sensor.png', 'image', 630 + moveX, 730 + moveY]);
+                nodesTable.addRow([24, 'RASP_LIGHT', DIR + 'sensor.png', 'image', 710 + moveX, 720 + moveY]);
+                nodesTable.addRow([25, 'RASP_ALCOHOL_GAS', DIR + 'sensor.png', 'image', 750 + moveX, 640 + moveY]);
+                nodesTable.addRow([27, 'RASP_GPS', DIR + 'sensor.png', 'image', 750 + moveX, 570 + moveY]);
+
                 ///////////JNU_Rasp_SenSor
-                nodesTable.addRow([21, 'Raspberry Pi', DIR + 'Raspberry.png', 'image', 950 + moveX, 520 + moveY]);
-                nodesTable.addRow([22, 'RASP_TEMP', DIR + 'sensor.png', 'image', 900 + moveX, 650 + moveY]);
-                nodesTable.addRow([23, 'RASP_HUMID', DIR + 'sensor.png', 'image', 980 + moveX, 680 + moveY]);
-                nodesTable.addRow([24, 'RASP_LIGHT', DIR + 'sensor.png', 'image', 1060 + moveX, 650 + moveY]);
-                nodesTable.addRow([25, 'RASP_AIRQUALITY', DIR + 'sensor.png', 'image', 1100 + moveX, 590 + moveY]);
-                nodesTable.addRow([27, 'RASP_GPS', DIR + 'sensor.png', 'image', 1100 + moveX, 520 + moveY]);
+                nodesTable.addRow([31, 'Raspberry Pi', DIR + 'Raspberry.png', 'image', 950 + moveX, 520 + moveY]);
+                nodesTable.addRow([32, 'RASP_TEMP', DIR + 'sensor.png', 'image', 900 + moveX, 650 + moveY]);
+                nodesTable.addRow([33, 'RASP_DUST', DIR + 'sensor.png', 'image', 980 + moveX, 680 + moveY]);
+                nodesTable.addRow([34, 'RASP_LIGHT', DIR + 'sensor.png', 'image', 1060 + moveX, 650 + moveY]);
+                nodesTable.addRow([35, 'RASP_ALCOHOL_GAS', DIR + 'sensor.png', 'image', 1100 + moveX, 590 + moveY]);
+                nodesTable.addRow([36, 'RASP_GPS', DIR + 'sensor.png', 'image', 1100 + moveX, 520 + moveY]);
+
 
 ///////////DEMO_PHONE,DRONE
                 nodesTable.addRow([17, 'TYPE 0 - DEMO', DIR + 'TYPEO-hard.PNG', 'image', 500 + moveX, 170 + moveY]);
@@ -96,8 +110,8 @@
                 nodesTable.addRow([19, 'Demo Phone', DIR + 'Iphone.PNG', 'image', 580 + moveX, 20 + moveY]);
 
 /////////////KU
-                nodesTable.addRow([11, 'KU_Sensor1', DIR + 'sensor.png', 'image', 90 + moveX, 280 + moveY]);
-                nodesTable.addRow([12, 'KU_Sensor2', DIR + 'sensor.png', 'image', 80 + moveX, 380 + moveY]);
+                nodesTable.addRow([11, 'KU_DUST', DIR + 'sensor.png', 'image', 90 + moveX, 280 + moveY]);
+                nodesTable.addRow([12, 'KU_GPS', DIR + 'sensor.png', 'image', 80 + moveX, 380 + moveY]);
                 nodesTable.addRow([13, 'KU_Video', DIR + 'video.PNG', 'image', 108 + moveX, 470 + moveY]);
 
 
@@ -105,20 +119,34 @@
 ////////////Demo Drone_sensor
                 nodesTable.addRow([51, 'DRONE_TEMP', DIR + 'sensor.png', 'image', 240 + moveX, moveY - 70]);
 
-                nodesTable.addRow([52, 'DRONE_HUMID', DIR + 'sensor.png', 'image', 320 + moveX, moveY - 100]);
+                nodesTable.addRow([52, 'DRONE_DUST', DIR + 'sensor.png', 'image', 320 + moveX, moveY - 100]);
 
                 nodesTable.addRow([53, 'DRONE_LIGHT', DIR + 'sensor.png', 'image', 400 + moveX, moveY - 130]);
 
-                nodesTable.addRow([54, 'DRONE_AIRQUALITY', DIR + 'sensor.png', 'image', 480 + moveX, moveY - 110]);
+                nodesTable.addRow([54, 'DRONE_ALCOHOL_GAS', DIR + 'sensor.png', 'image', 480 + moveX, moveY - 110]);
 
                 nodesTable.addRow([55, 'DRONE_GPS', DIR + 'sensor.png', 'image', 550 + moveX, moveY - 80]);
 
-                nodesTable.addRow([56, 'demo_Sensor1', DIR + 'sensor.png', 'image', 680 + moveX, moveY-70]);
-                nodesTable.addRow([57, 'demo_Sensor2', DIR + 'sensor.png', 'image', 750 + moveX, moveY-30]);
-				nodesTable.addRow([58, 'demo_Video', DIR + 'video.PNG', 'image', 240 + moveX, 70 + moveY]);
+                nodesTable.addRow([56, 'demo_DUST', DIR + 'sensor.png', 'image', 680 + moveX, moveY - 70]);
+                nodesTable.addRow([57, 'demo_GPS', DIR + 'sensor.png', 'image', 750 + moveX, moveY - 30]);
+                nodesTable.addRow([58, 'demo_Video', DIR + 'video.PNG', 'image', 240 + moveX, 70 + moveY]);
+
+
+//////////////////새로 추가된 CO_GAS
+                nodesTable.addRow([59, 'DRONE_CO_GAS', DIR + 'sensor.png', 'image', 830 + moveX, 170 + moveY]);
+                nodesTable.addRow([60, 'RASP_CO_GAS', DIR + 'sensor.png', 'image', 1050 + moveX, 470 + moveY]);
+                nodesTable.addRow([61, 'RASP_CO_GAS', DIR + 'sensor.png', 'image', 720 + moveX, 520 + moveY]);
+                nodesTable.addRow([62, 'DRONE_CO_GAS', DIR + 'sensor.png', 'image', 210 + moveX, moveY - 10]);
+/////////////////건국대데모장 드론
+                nodesTable.addRow([63, 'DEMO_PHONE_VIDEO', DIR + 'video.PNG', 'image', 730 + moveX, moveY + 50]);
+////////////////GIST type C
+                nodesTable.addRow([64, 'TYPE C - GIST', DIR + 'TYPEC-hard.PNG', 'image', 350 + moveX, moveY + 500]);
+/////////////////gist datalake
+                nodesTable.addRow([65, 'DataLake', DIR + 'datalake.png', 'image', 310 + moveX, moveY + 700]);
 
 
 /////////////////////////////////linkstable
+
                 linksTable.addColumn('number', 'from');
                 linksTable.addColumn('number', 'to');
                 linksTable.addColumn('number', 'id');
@@ -126,10 +154,11 @@
                 linksTable.addColumn('string', 'color');
 
 
-                linksTable.addRow([2, 1, 1, 'line', undefined]);
-                linksTable.addRow([3, 1, 2, 'line', undefined]);
-                linksTable.addRow([4, 1, 3, 'line', undefined]);
-                linksTable.addRow([6, 3, 5, 'line', undefined]);
+                linksTable.addRow([2, 1, 1, 'moving-arrows', undefined]);
+                linksTable.addRow([3, 1, 2, 'moving-arrows', undefined]);
+                linksTable.addRow([4, 1, 3, 'moving-arrows', undefined]);
+		linksTable.addRow([4, 1, 5, 'line', undefined]);
+
                 linksTable.addRow([8, 2, 7, 'line', undefined]);
                 linksTable.addRow([9, 10, 8, 'line', undefined]);
                 linksTable.addRow([10, 4, 9, 'line', undefined]);
@@ -142,14 +171,14 @@
 
 
                 //KOREN - DEMO SITE
-                linksTable.addRow([17, 1, 16, 'line', undefined]);
+                linksTable.addRow([17, 1, 16, 'moving-arrows', undefined]);
                 linksTable.addRow([18, 17, 17, 'line', undefined]);
                 linksTable.addRow([19, 17, 18, 'line', undefined]);
 
 
                 linksTable.addRow([20, 10, 19, 'line', undefined]);
 
-                linksTable.addRow([21, 4, 20, 'line', undefined]);
+                linksTable.addRow([21, 3, 20, 'line', undefined]);
 
                 linksTable.addRow([22, 21, 21, 'line', undefined]);
                 linksTable.addRow([23, 21, 22, 'line', undefined]);
@@ -157,10 +186,16 @@
                 linksTable.addRow([25, 21, 24, 'line', undefined]);
 
                 linksTable.addRow([26, 10, 25, 'line', undefined]);
-                linksTable.addRow([27, 21, 26, 'line', undefined]);
+                linksTable.addRow([27, 21, 90, 'line', undefined]);
 
 
-
+                ////////////JNU LINK new in 1101
+                linksTable.addRow([31, 4, 41, 'line', undefined]);
+                linksTable.addRow([32, 31, 42, 'line', undefined]);
+                linksTable.addRow([33, 31, 43, 'line', undefined]);
+                linksTable.addRow([34, 31, 44, 'line', undefined]);
+                linksTable.addRow([35, 31, 45, 'line', undefined]);
+                linksTable.addRow([36, 31, 46, 'line', undefined]);
 
                 //////////////////////안 쓰는 sensor 추가부분.
                 linksTable.addRow([51, 18, 26, 'line', undefined]);
@@ -168,9 +203,20 @@
                 linksTable.addRow([53, 18, 28, 'line', undefined]);
                 linksTable.addRow([54, 18, 29, 'line', undefined]);
                 linksTable.addRow([55, 18, 30, 'line', undefined]);
-				linksTable.addRow([56, 19, 31, 'line', undefined]);
+                linksTable.addRow([56, 19, 31, 'line', undefined]);
                 linksTable.addRow([57, 19, 32, 'line', undefined]);
-				linksTable.addRow([58, 18, 33, 'line', undefined]);
+                linksTable.addRow([58, 18, 33, 'line', undefined]);
+
+                linksTable.addRow([59, 10, 47, 'line', undefined]);
+                linksTable.addRow([60, 31, 48, 'line', undefined]);
+                linksTable.addRow([61, 21, 49, 'line', undefined]);
+                linksTable.addRow([62, 18, 50, 'line', undefined]);
+                linksTable.addRow([63, 19, 51, 'line', undefined]);
+///////////////////////////GIST TYpe C - KOREN
+                linksTable.addRow([1, 64, 52, 'moving-arrows', undefined]);
+////////////////////////////gist datalake
+                linksTable.addRow([64, 65, 53, 'moving-arrows', undefined]);
+
 
 
                 //node random position
@@ -186,11 +232,13 @@
 
                 options = {
                     //adjust the frame size 
-                    'width': '1500px',
-                    'height': '800px',
+
+                    'width': '1920px',
+                    'height': '1080px',
                     //  'stabilize': true;
                     'links': {
-                        'width': 2.5
+
+                        'width': 3.5
                     }
 
 
@@ -203,84 +251,394 @@
                 //set the canvas size
                 network._setSize("100%", "100%");
 
+
+                //////////////////노드클릭 -> 그라파나 호출
+                links.events.addListener(network, 'select', function (params) {
+                    var string = JSON.stringify(network.getSelection()).split(':');
+                    var nodeno = string[1].slice(0, -2);
+
+			alert(nodeno);
+
+                    if (nodeno == "0") {
+                        //페이지 지정
+                        parent.document.getElementById("summary").src = "210.114.90.176";
+                    }
+
+                    /////JNU RASPBERRY
+                    if (nodeno == "18" || nodeno == "19" || nodeno == "20" ||
+                            nodeno == "21" || nodeno == "22" || nodeno == "23") {
+                        parent.document.getElementById("grafana1").src = "210.114.90.176";
+
+                        ////gas sensor 클릭. 임계치 넘을경우 grafana 쪽 interface
+                        if (nodeno == 39) {
+                            parent.document.getElementById("grafana1").src = "210.114.90.176";
+                            parent.document.getElementById("grafana2").src = "210.114.90.176";
+                            parent.document.getElementById("grafana3").src = "210.114.90.176";
+                        }
+
+                    }
+
+
+                    /////KU Phone
+                    if (nodeno == "4" || nodeno == "27" || nodeno == "28" ||
+                            nodeno == "29") {
+
+                        parent.document.getElementById("grafana2").src = "210.114.90.176";
+
+                    }
+
+                    ///demoDrone
+                    if (nodeno == "25" || nodeno == "37" || nodeno == "41" ||
+                            nodeno == "30" || nodeno == "31" || nodeno == "32"
+                            || nodeno == "33" || nodeno == "34") {
+
+                        parent.document.getElementById("grafana3").src = "210.114.90.176";
+
+                    }
+
+                });
+
             }
 
 
 
- 	$(function () {
+            $(function () {
                 // socket.io 서버에 접속한다
                 var socket = io();
                 socket.emit("init", {
                     connect: 'on'
                 });
                 // 서버로부터의 메시지가 수신되면
-		socket.on("rasp", function(data) {
-      		  console.log(data);
-      		    if(data == null) {
-			linksTable.setCell(2, 3, 'line');
-        linksTable.setCell(2, 4, 'black');
-        linksTable.setCell(5, 3, 'line');
-        linksTable.setCell(5, 4, 'black');
-        linksTable.setCell(7, 3, 'line');
-        linksTable.setCell(7, 4, 'black');
-        linksTable.setCell(8, 3, 'line');
-        linksTable.setCell(8, 4, 'black');
-        linksTable.setCell(12, 3, 'line');
-        linksTable.setCell(12, 4, 'black');
-        linksTable.setCell(13, 3, 'line');
-        linksTable.setCell(13, 4, 'black');
-        network.draw(nodesTable, linksTable, options);
-      } else {
-	linksTable.setCell(2, 3, 'moving-arrows');
-        linksTable.setCell(2, 4, 'blue');
-        linksTable.setCell(5, 3, 'moving-arrows');
-        linksTable.setCell(5, 4, 'blue');
-        linksTable.setCell(7, 3, 'moving-arrows');
-        linksTable.setCell(7, 4, 'blue');
-        linksTable.setCell(8, 3, 'moving-arrows');
-        linksTable.setCell(8, 4, 'blue');
-        linksTable.setCell(12, 3, 'moving-arrows');
-        linksTable.setCell(12, 4, 'blue');
-        linksTable.setCell(13, 3, 'moving-arrows');
-        linksTable.setCell(13, 4, 'blue');
-        network.draw(nodesTable, linksTable, options);
-      }   
-   		 });
-		
-                socket.on("rasp2", function (data) {
+
+                socket.on("JNU01rasp", function (data) {
+                    console.log(data);
+                    if (data == "null") {
+
+                        //전남대 TYPE 0 - 전남대 라즈베리파이 링크
+                        linksTable.setCell(24, 3, 'line');
+
+                        nodesTable.setCell(20, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(21, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(22, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(23, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(24, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(40, 2, DIR + 'sensor.PNG');
+
+                        linksTable.setCell(25, 3, 'line');
+                        linksTable.setCell(26, 3, 'line');
+                        linksTable.setCell(27, 3, 'line');
+                        linksTable.setCell(28, 3, 'line');
+                        linksTable.setCell(29, 3, 'line');
+                        linksTable.setCell(39, 3, 'line');
+
+                        network.draw(nodesTable, linksTable, options);
+
+                    } else {
+
+                        //전남대 TYPE 0 - 전남대 라즈베리파이 링크
+                        linksTable.setCell(24, 3, 'moving-arrows');
+
+                        if (data.temp == "null") {
+                            nodesTable.setCell(20, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(25, 3, 'line');
+                        } else {
+                            nodesTable.setCell(20, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(25, 3, 'moving-arrows');
+                        }
+
+                        if (data.dust == "null") {
+                            nodesTable.setCell(21, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(26, 3, 'line');
+                        } else {
+                            nodesTable.setCell(21, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(26, 3, 'moving-arrows');
+
+                            if (data.dust * 1 > 200) {
+                                nodesTable.setCell(21, 2, DIR + 'sensorOFF.PNG');
+                            }
+                        }
+
+                        if (data.light == "null") {
+                            nodesTable.setCell(22, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(27, 3, 'line');
+                        } else {
+                            nodesTable.setCell(22, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(27, 3, 'moving-arrows');
+
+                            if (data.light * 1 > 700 || data.light * 1 < 150) {
+                                nodesTable.setCell(22, 2, DIR + 'sensorOFF.PNG');
+                            }
+                        }
+
+                        if (data.alcohol_gas == "null") {
+                            nodesTable.setCell(23, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(28, 3, 'line');
+                        } else {
+                            nodesTable.setCell(23, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(28, 3, 'moving-arrows');
+
+                            if (data.alcohol_gas * 1 > 150) {
+                                nodesTable.setCell(23, 2, DIR + 'sensorOFF.PNG');
+                            }
+                        }
+
+                        if (data.longitude == "null" || data.latitude == "null") {
+                            nodesTable.setCell(24, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(29, 3, 'line');
+                        } else {
+                            nodesTable.setCell(24, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(29, 3, 'moving-arrows');
+                        }
+
+                        if (data.co_gas == "null") {
+                            nodesTable.setCell(40, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(39, 3, 'line');
+                        } else {
+                            nodesTable.setCell(40, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(39, 3, 'moving-arrows');
+
+                            if (data.co_gas * 1 > 300) {
+                                nodesTable.setCell(40, 2, DIR + 'sensorOFF.PNG');
+                            }
+                        }
+                        network.draw(nodesTable, linksTable, options);
+
+
+                    }
+                });
+
+                socket.on("JNU03demo", function (data) {
+                    console.log(data);
+                    console.log(data);
+                    if (data == "null") {
+
+                        //데모 TYPE 0 - 전남대 드론 링크
+                        linksTable.setCell(14, 3, 'line');
+
+                        nodesTable.setCell(31, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(32, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(33, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(34, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(35, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(42, 2, DIR + 'sensor.PNG');
+
+                        linksTable.setCell(30, 3, 'line');
+                        linksTable.setCell(31, 3, 'line');
+                        linksTable.setCell(32, 3, 'line');
+                        linksTable.setCell(33, 3, 'line');
+                        linksTable.setCell(34, 3, 'line');
+                        linksTable.setCell(41, 3, 'line');
+
+                        network.draw(nodesTable, linksTable, options);
+
+                    } else {
+
+                        //데모 TYPE 0 - 전남대 드론 링크
+                        linksTable.setCell(14, 3, 'moving-arrows');
+
+                        if (data.temp == "null") {
+                            nodesTable.setCell(31, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(30, 3, 'line');
+                        } else {
+                            nodesTable.setCell(31, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(30, 3, 'moving-arrows');
+                        }
+
+                        if (data.dust == "null") {
+                            nodesTable.setCell(32, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(31, 3, 'line');
+                        } else {
+                            nodesTable.setCell(32, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(31, 3, 'moving-arrows');
+
+                            if (data.dust * 1 > 200) {
+                                nodesTable.setCell(31, 2, DIR + 'sensorOFF.PNG');
+                            }
+                        }
+
+                        if (data.light == "null") {
+                            nodesTable.setCell(33, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(32, 3, 'line');
+                        } else {
+                            nodesTable.setCell(33, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(32, 3, 'moving-arrows');
+
+                            if (data.light * 1 > 600 || data.light * 1 < 150) {
+                                nodesTable.setCell(33, 2, DIR + 'sensorOFF.PNG');
+                            }
+                        }
+
+                        if (data.alcohol_gas == "null") {
+                            nodesTable.setCell(34, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(33, 3, 'line');
+                        } else {
+                            nodesTable.setCell(34, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(33, 3, 'moving-arrows');
+
+                            if (data.alcohol_gas * 1 > 150) {
+                                nodesTable.setCell(34, 2, DIR + 'sensorOFF.PNG');
+                            }
+                        }
+
+                        if (data.longitude == "null" || data.latitude == "null") {
+                            nodesTable.setCell(35, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(34, 3, 'line');
+                        } else {
+                            nodesTable.setCell(35, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(34, 3, 'moving-arrows');
+                        }
+
+                        if (data.co_gas == "null") {
+                            nodesTable.setCell(42, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(41, 3, 'line');
+                        } else {
+                            nodesTable.setCell(42, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(41, 3, 'moving-arrows');
+
+                            if (data.co_gas * 1 > 300) {
+                                nodesTable.setCell(42, 2, DIR + 'sensorOFF.PNG');
+                            }
+                        }
+                        network.draw(nodesTable, linksTable, options);
+
+
+                    }
+                });
+
+                socket.on("KU01phone", function (data) {
                     console.log(data);
 
-                    if (data == null) {
+                    if (data == "null") {
+
+                        //KU TYPE 0 - KU phone 링크
+                        linksTable.setCell(4, 3, 'line');
+
+                        nodesTable.setCell(28, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(29, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(30, 2, DIR + 'sensor.PNG');
+
+                        linksTable.setCell(7, 3, 'line');
+                        linksTable.setCell(8, 3, 'line');
+                        linksTable.setCell(9, 3, 'line');
+
+
+                        network.draw(nodesTable, linksTable, options);
+
                     } else {
 
 
-                        if (data.temp != "null") {
-                            linksTable.setCell(20, 3, 'moving-arrows');
-                        }
-                        if (data.humidity != "null") {
-                            linksTable.setCell(21, 3, 'moving-arrows');
+                        //KU TYPE 0 - KU phone 링크
+                        linksTable.setCell(4, 3, 'moving-arrows');
+
+                        if (data.temp == "null") {
+                            nodesTable.setCell(28, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(7, 3, 'line');
+                        } else {
+                            nodesTable.setCell(28, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(7, 3, 'moving-arrows');
+
 
                         }
-                        if (data.light !="null") {
-                            linksTable.setCell(22, 3, 'moving-arrows');
 
+                        if (data.dust == "null") {
+                            nodesTable.setCell(29, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(8, 3, 'line');
+                        } else {
+                            nodesTable.setCell(29, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(8, 3, 'moving-arrows');
+
+                            if (data.dust * 1 > 200) {
+                                nodesTable.setCell(29, 2, DIR + 'sensorOFF.PNG');
+                            }
                         }
 
-                        if (data.ratio != "null" && data.concentration != "null" && data.lowpulseoccupancy != "null") {
-                            linksTable.setCell(23, 3, 'moving-arrows');
+                        if (data.light == "null") {
+                            nodesTable.setCell(30, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(9, 3, 'line');
+                        } else {
+                            nodesTable.setCell(30, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(9, 3, 'moving-arrows');
 
+                            if (data.light * 1 > 700 || data.light * 1 < 150) {
+                                nodesTable.setCell(30, 2, DIR + 'sensorOFF.PNG');
+                            }
                         }
-                        if (data.latitude != "null" && data.logitude != "null") {
-                            linksTable.setCell(25, 3, 'moving-arrows');
 
-                        }
-                        
+
                         network.draw(nodesTable, linksTable, options);
+
+
                     }
+                });
 
-                }); 
 
-           }); 
+                socket.on("KU02demo", function (data) {
+                    console.log(data);
+
+                    if (data == "null") {
+
+                        //demo TYPE 0 - KU phone 링크
+                        linksTable.setCell(15, 3, 'line');
+
+                        nodesTable.setCell(36, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(37, 2, DIR + 'sensor.PNG');
+                        nodesTable.setCell(43, 2, DIR + 'sensor.PNG');
+
+
+                        linksTable.setCell(35, 3, 'line');
+                        linksTable.setCell(36, 3, 'line');
+                        linksTable.setCell(63, 3, 'line');
+
+
+                        network.draw(nodesTable, linksTable, options);
+
+                    } else {
+
+
+                        //demo TYPE 0 - KU phone 링크
+                        linksTable.setCell(15, 3, 'moving-arrows');
+
+                        if (data.temp == "null") {
+                            nodesTable.setCell(36, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(35, 3, 'line');
+                        } else {
+                            nodesTable.setCell(36, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(35, 3, 'moving-arrows');
+                        }
+
+                        if (data.dust == "null") {
+                            nodesTable.setCell(37, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(36, 3, 'line');
+                        } else {
+                            nodesTable.setCell(37, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(36, 3, 'moving-arrows');
+
+                            if (data.dust * 1 > 200) {
+                                nodesTable.setCell(37, 2, DIR + 'sensorOFF.PNG');
+                            }
+                        }
+
+                        if (data.light == "null") {
+                            nodesTable.setCell(43, 2, DIR + 'sensor.PNG');
+                            linksTable.setCell(63, 3, 'line');
+                        } else {
+                            nodesTable.setCell(43, 2, DIR + 'sensorON.PNG');
+                            linksTable.setCell(63, 3, 'moving-arrows');
+
+                            if (data.light * 1 > 700 || data.light * 1 < 160) {
+                                nodesTable.setCell(43, 2, DIR + 'sensorOFF.PNG');
+                            }
+                        }
+
+
+                        network.draw(nodesTable, linksTable, options);
+
+
+                    }
+                });
+
+
+            });
 
 
             /** setCell(Table_row, Table_column, constant)

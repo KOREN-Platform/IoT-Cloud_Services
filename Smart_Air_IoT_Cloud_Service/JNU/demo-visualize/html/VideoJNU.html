@@ -6,7 +6,7 @@
 	</head>
 	<body >
 <div id="video-jwplayer_wrapper" style="position:relative; display:block; width:960px; height:540px;">
-<object type="application/x-shockwave-flash" data="/jwplayer/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" id="video-jwplayer" name="video-jwplayer" tabindex="0">
+<object type="application/x-shockwave-flash" data="./jwplayer/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" id="video-jwplayer" name="video-jwplayer" tabindex="0">
 <param name="allowfullscreen" value="true">
 <param name="allowscriptaccess" value="always">
 <param name="seamlesstabbing" value="true">
@@ -16,20 +16,21 @@
 <div id="video-jwplayer_jwpsrv" style="position:absolute; top:opx; z-index:10;"></div>
 </div>
 
-<script src="/jwplayer/jwplayer.js"></script>
+<script src="./jwplayer/jwplayer.js"></script>
 <script>jwplayer.key="ANMwaJKCHbmYxjqGIUi2jA7tw25nxb9Ut2+b/A==";</script>
 
 <script type="text/javascript">
 jwplayer('video-jwplayer').setup({
-flashplayer:"/jwplayer/jwplayer.flash.swf"
-,file:"rtmp://168.131.148.45:20001/encoder/stream9"
+flashplayer:"./jwplayer/jwplayer.flash.swf"
+,file:"rtmp://168.131.161.200:1935/encoder/jnu2"
 ,autoStart:true
 ,rtmp:{
 bufferlength:0.1
 }
 ,deliveryType:"streaming"
-,width:1280
-,height:720
+
+,width: 385 
+,height: 518
 ,player:{
 modes:{
 linear:{

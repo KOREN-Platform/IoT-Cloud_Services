@@ -8,7 +8,7 @@ console.log('start');
 // InfluxDB
 var DB = new influx.InfluxDB({
     // single-host configuration
-    host: '210.114.90.176',
+    host: '210.114.90.191',
     port: 8086, // optional, default 8086
     protocol: 'http', // optional, default 'http'
     username: 'id',
@@ -16,7 +16,7 @@ var DB = new influx.InfluxDB({
     database: 'station'
 });
 
-var resourceKafka = new kafka.Client('210.114.90.176:2181');
+var resourceKafka = new kafka.Client('210.114.90.191:2181');
 var resourceOffset = new kafka.Offset(resourceKafka);
 
 console.log('fetch');
@@ -39,6 +39,7 @@ resourceOffset.fetch([{
     });
 
     resourceConsumer.on('message', function(message) {
+	try {
 	var messageJSON = JSON.parse(message.value);
         DB.writePoints([{
             measurement: topic_name,
@@ -56,7 +57,9 @@ resourceOffset.fetch([{
             },
         }])
         console.log(messageJSON);
-
+	} catch (err) {
+	console.log("이상한값 들어옴");
+	}
     });
 
 });

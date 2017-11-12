@@ -130,8 +130,8 @@ links.Network = function(container) {
     this.constants = {
         "nodes": {
             "radiusMin": 5,
-            "radiusMax": 20,
-            "radius": 5,
+            "radiusMax": 35,
+            "radius": 15,
             "distance": 100, // px
             "style": "rect",
             "image": undefined,

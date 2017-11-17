@@ -33,4 +33,3 @@ while 1:
 		#f = open("/var/log/apache/flumeSpool/sensorlog", 'a')
                 data = '{ "ID" : %s , "light" : %s , "temp" : %s , "latitude" : %s , "longitude" : %s , "dust" : %s , "alcohol_gas" : %s , "co_gas" : %s }\n' %(id,light,temp,latitude,longitude,dust,alcohol_gas,co_gas)
                 f.write(data)
-	time.sleep(1)

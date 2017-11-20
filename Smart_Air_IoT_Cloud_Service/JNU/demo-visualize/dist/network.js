@@ -156,7 +156,7 @@ links.Network = function(container) {
             "fontSize": 14, // px
             "fontFace": "arial",
             //"distance": 100, //px
-            "length": 100,   // px
+            "length": 60,   // px
             "dashlength": 10,
             "dashgap": 5
         },

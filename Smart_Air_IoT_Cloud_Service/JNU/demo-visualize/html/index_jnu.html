@@ -6,8 +6,9 @@
         <style>
             div {font: 10pt arial;
 
-                 background-image:url('../img/unnamed.png');
-                 background-size: 100% 100%;
+                 /*background-image:url('../img/unnamed.png');
+                */ 
+		background-size: 100% 100%;
             }
 
 
@@ -31,7 +32,7 @@
             var DIR = '../img/';
             var moveX = 0;
             var moveY = 160;
-
+	    var deltaCam = 10;
 
             //google.load(API_name, version)
             google.load('visualization', '1');//?
@@ -75,7 +76,9 @@
                 nodesTable.addRow([10, 'JNU_Drone', DIR + 'drone.PNG', 'image', 950 + moveX, 300 + moveY]);
 
 
-                ///////////////JNU_DORNE_SENSOR
+
+
+		///////////////JNU_DORNE_SENSOR
                 nodesTable.addRow([14, 'DRONE_TEMP', DIR + 'sensor.png', 'image', 900 + moveX, 150 + moveY]);
                 nodesTable.addRow([15, 'DRONE_DUST', DIR + 'sensor.png', 'image', 980 + moveX, 120 + moveY]);
                 nodesTable.addRow([16, 'DRONE_LIGHT', DIR + 'sensor.png', 'image', 1060 + moveX, 150 + moveY]);
@@ -144,9 +147,9 @@
                 nodesTable.addRow([70, 'TYPE O - JEJU', DIR + 'TYPEO-hard.PNG', 'image', 360 + moveX, 270 + moveY]);
 
                 nodesTable.addRow([71, 'Raspberry Pi', DIR + 'Raspberry.png', 'image', 220 + moveX, 270 + moveY]);
-                nodesTable.addRow([72, 'TEMP', DIR + 'sensor.png', 'image', 90 + moveX, 300 + moveY]);
-                nodesTable.addRow([73, 'DUST', DIR + 'sensor.png', 'image', 100 + moveX, 230 + moveY]);
-                nodesTable.addRow([74, 'LIGHT', DIR + 'sensor.png', 'image', 140 + moveX, 170 + moveY]);
+                nodesTable.addRow([72, 'RASP_1', DIR + 'sensor.png', 'image', 90 + moveX, 300 + moveY]);
+                nodesTable.addRow([73, 'RASP_2', DIR + 'sensor.png', 'image', 100 + moveX, 230 + moveY]);
+                nodesTable.addRow([74, 'RASP_3', DIR + 'sensor.png', 'image', 140 + moveX, 170 + moveY]);
 
 
 //KU
@@ -159,11 +162,16 @@
                 nodesTable.addRow([104, '', DIR + 'JEJU.png', 'image', 360 + moveX, 220 + moveY]);
 
 
-                nodesTable.addRow([75, 'ALCOHOL', DIR + 'sensor.png', 'image', 220 + moveX, 170 + moveY]);
+		nodesTable.addRow([75, 'ALCOHOL', DIR + 'sensor.png', 'image', 220 + moveX, 170 + moveY]);
                 nodesTable.addRow([76, 'GPS', DIR + 'sensor.png', 'image', 290 + moveX, 190 + moveY]);
                 nodesTable.addRow([77, 'CO_GAS', DIR + 'sensor.png', 'image', 170 + moveX, 330 + moveY]);
 
 
+		// camera line moving arrow
+
+                nodesTable.addRow([301, '','','image', 550 + moveX, 350 + moveY + deltaCam]);
+                nodesTable.addRow([304, '','', 'image', 780 + moveX, 400 + moveY + deltaCam]);
+                nodesTable.addRow([310, '', '', 'image', 950 + moveX, 300 + moveY + deltaCam]);
 
 
 
@@ -182,11 +190,13 @@
                 linksTable.addRow([4, 1, 5, 'line', undefined]);
 
                 linksTable.addRow([8, 2, 7, 'line', undefined]);
-                linksTable.addRow([9, 10, 8, 'moving-arrows', 'RED']);
+		//cam
+                linksTable.addRow([9, 10, 8, 'line', undefined]);
                 linksTable.addRow([10, 4, 9, 'line', undefined]);
                 linksTable.addRow([11, 8, 10, 'line', undefined]);
                 linksTable.addRow([12, 8, 11, 'line', undefined]);
-                linksTable.addRow([13, 8, 12, 'moving-arrows', 'RED']);
+		//cam
+                linksTable.addRow([13, 8, 12, 'line', undefined]);
                 linksTable.addRow([14, 10, 13, 'line', undefined]);
                 linksTable.addRow([15, 10, 14, 'line', undefined]);
                 linksTable.addRow([16, 10, 15, 'line', undefined]);
@@ -227,13 +237,15 @@
                 linksTable.addRow([55, 18, 30, 'line', undefined]);
                 linksTable.addRow([56, 19, 31, 'line', undefined]);
                 linksTable.addRow([57, 19, 32, 'line', undefined]);
-                linksTable.addRow([58, 18, 33, 'moving-arrows', 'RED']);
+		//cam
+                linksTable.addRow([58, 18, 33, 'line', undefined]);
 
                 linksTable.addRow([59, 10, 47, 'line', undefined]);
                 linksTable.addRow([60, 31, 48, 'line', undefined]);
                 linksTable.addRow([61, 21, 49, 'line', undefined]);
                 linksTable.addRow([62, 18, 50, 'line', undefined]);
-                linksTable.addRow([63, 19, 51, 'moving-arrows', 'RED']);
+		//cam
+                linksTable.addRow([63, 19, 51, 'line', undefined]);
                 ///////////////////////////GIST TYpe C - KOREN
                 linksTable.addRow([1, 64, 52, 'moving-arrows', undefined]);
                 ////////////////////////////gist datalake
@@ -248,11 +260,15 @@
                 linksTable.addRow([74, 71, 58, 'line', undefined]);
 
 
- 	linksTable.addRow([75, 71, 59, 'line', undefined]);
- 	linksTable.addRow([76, 71, 60, 'line', undefined]);
-	 linksTable.addRow([77, 71, 61, 'line', undefined]);
+		
+	        linksTable.addRow([75, 71, 59, 'line', undefined]);
+       		linksTable.addRow([76, 71, 60, 'line', undefined]);
+         	linksTable.addRow([77, 71, 61, 'line', undefined]);
 
-
+		
+       		linksTable.addRow([304, 301, 300, 'line', 'WHITE']);
+       		linksTable.addRow([310, 304, 301, 'line', 'WHITE']);
+		
                 //node random position
                 //randoms x,y variable
 
@@ -295,32 +311,32 @@
 
                     if (nodeno == 39)
                         parent.document.getElementById("grafana1").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_drone?refresh=3s&orgId=1&panelId=3&from=1511157321886&to=1511157361886";
-                    if (nodeno == 8)
-                        parent.document.getElementById("grafana1").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_drone?refresh=3s&orgId=1&panelId=1&from=1511157271479&to=1511157311479";
-                    if (nodeno == 9)
-                        parent.document.getElementById("grafana1").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_drone?refresh=3s&orgId=1&panelId=5&from=1511157370888&to=1511157410888";
-                    if (nodeno == 10)
-                        parent.document.getElementById("grafana1").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_drone?refresh=3s&orgId=1&panelId=2&from=1511157298231&to=1511157338231";
-                    if (nodeno == 11)
-                        parent.document.getElementById("grafana").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_drone?refresh=3s&orgId=1&panelId=4&from=1511157344443&to=1511157384443";
-
-
-                    if (nodeno == 40)
-                        parent.document.getElementById("grafana2").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_rasp2?orgId=1&from=1511157486095&to=1511157556098&refresh=3s&panelId=3";
-                    if (nodeno == 20)
-                        parent.document.getElementById("grafana2").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_rasp2?orgId=1&from=1511157406186&to=1511157476186&refresh=3s&panelId=1";
-                    if (nodeno == 21)
-                        parent.document.getElementById("grafana2").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_rasp2?orgId=1&from=1511157505240&to=1511157575240&refresh=3s&panelId=5";
-                    if (nodeno == 22)
-                        parent.document.getElementById("grafana2").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_rasp2?orgId=1&from=1511157443775&to=1511157513778&refresh=3s&panelId=2";
-                    if (nodeno == 23)
-                        parent.document.getElementById("grafana2").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_rasp2?orgId=1&from=1511157462978&to=1511157532981&refresh=3s&panelId=4";
-
-
-
-                    if (nodeno == 28)
-                        parent.document.getElementById("grafana3").src = "210.114.90.176";
-
+                            if(nodeno == 8)
+                            parent.document.getElementById("grafana1").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_drone?refresh=3s&orgId=1&panelId=1&from=1511157271479&to=1511157311479";
+                            if(nodeno == 9)
+                            parent.document.getElementById("grafana1").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_drone?refresh=3s&orgId=1&panelId=5&from=1511157370888&to=1511157410888";
+                            if(nodeno == 10)
+                            parent.document.getElementById("grafana1").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_drone?refresh=3s&orgId=1&panelId=2&from=1511157298231&to=1511157338231";
+                            if(nodeno == 11)
+                            parent.document.getElementById("grafana").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_drone?refresh=3s&orgId=1&panelId=4&from=1511157344443&to=1511157384443";
+                        
+                           
+                            if(nodeno == 40)
+                             parent.document.getElementById("grafana2").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_rasp2?orgId=1&from=1511157486095&to=1511157556098&refresh=3s&panelId=3";
+                            if(nodeno == 20)
+                            parent.document.getElementById("grafana2").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_rasp2?orgId=1&from=1511157406186&to=1511157476186&refresh=3s&panelId=1";
+                            if(nodeno == 21)
+                            parent.document.getElementById("grafana2").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_rasp2?orgId=1&from=1511157505240&to=1511157575240&refresh=3s&panelId=5";
+                            if(nodeno == 22)
+                            parent.document.getElementById("grafana2").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_rasp2?orgId=1&from=1511157443775&to=1511157513778&refresh=3s&panelId=2";
+                            if(nodeno == 23)
+                            parent.document.getElementById("grafana2").src = "http://210.114.90.191:3000/dashboard-solo/db/jnu_rasp2?orgId=1&from=1511157462978&to=1511157532981&refresh=3s&panelId=4";
+                            
+                            
+                            
+                           if(nodeno == 28)
+                            parent.document.getElementById("grafana3").src = "210.114.90.176";
+                        
 
 
 
@@ -754,6 +770,144 @@
             });
 
 
+	    socket.on("JNUCAM", function (data) {
+
+		console.log("JNUCAM : " + data)
+		if(data == true) {
+		
+		linksTable.setCell( 5, 3, 'moving-arrows');
+		linksTable.setCell( 5, 4, 'RED');
+		
+		linksTable.setCell( 53, 3, 'moving-arrows');
+		linksTable.setCell( 54, 3, 'moving-arrows');
+		linksTable.setCell( 53, 4, 'RED');
+		linksTable.setCell( 54, 4, 'RED');
+
+		} else {
+		
+		linksTable.setCell( 5, 3, 'line');
+		linksTable.setCell( 5, 4, undefined);
+		linksTable.setCell( 53, 3, 'line');
+		linksTable.setCell( 53, 3, 'line');
+		linksTable.setCell( 54, 4, 'WHITE');
+		linksTable.setCell( 54, 4, 'WHITE');
+		
+		}
+		network.draw(nodesTable, linksTable, options);
+	    })
+
+
+	   socket.on("KUCAM", function (data) {
+
+                console.log("KUCAM : " + data)
+                if(data == true) {
+
+                linksTable.setCell( 40, 3, 'moving-arrows', 'RED');
+
+                } else {
+
+                linksTable.setCell( 40, 3, 'line', undefined);
+
+                }
+                network.draw(nodesTable, linksTable, options);
+            })
+
+
+	    socket.on("JEJU01rasp", function (data) {
+                console.log(data);
+                if (data == null) {
+
+                    //JEJU TYPE 0 - JEJU 라즈베리파이 링크
+                    linksTable.setCell(46, 3, 'line');
+
+                    nodesTable.setCell(48, 2, DIR + 'sensor.png');
+                    nodesTable.setCell(49, 2, DIR + 'sensor.png');
+                    nodesTable.setCell(50, 2, DIR + 'sensor.png');
+                    nodesTable.setCell(55, 2, DIR + 'sensor.png');
+                    nodesTable.setCell(56, 2, DIR + 'sensor.png');
+                    nodesTable.setCell(57, 2, DIR + 'sensor.png');
+
+                    linksTable.setCell(47, 3, 'line');
+                    linksTable.setCell(48, 3, 'line');
+                    linksTable.setCell(49, 3, 'line');
+                    linksTable.setCell(50, 3, 'line');
+                    linksTable.setCell(51, 3, 'line');
+                    linksTable.setCell(52, 3, 'line');
+
+                    network.draw(nodesTable, linksTable, options);
+
+                } else {
+
+                    //JEJU TYPE 0 - JEJU 라즈베리파이 링크
+                    linksTable.setCell(46, 3, 'moving-arrows');
+
+                    if (data.temp == "null") {
+                        nodesTable.setCell(48, 2, DIR + 'sensor.png');
+                        linksTable.setCell(47, 3, 'line');
+                    } else {
+                        nodesTable.setCell(48, 2, DIR + 'sensorON.PNG');
+                        linksTable.setCell(47, 3, 'moving-arrows');
+                    }
+
+                    if (data.dust == "null") {
+                        nodesTable.setCell(49, 2, DIR + 'sensor.png');
+                        linksTable.setCell(48, 3, 'line');
+                    } else {
+                        nodesTable.setCell(49, 2, DIR + 'sensorON.PNG');
+                        linksTable.setCell(48, 3, 'moving-arrows');
+
+                        if (data.dust * 1 > 200) {
+                            nodesTable.setCell(49, 2, DIR + 'sensorOFF.PNG');
+                        }
+                    }
+			if (data.light == "null") {
+                        nodesTable.setCell(50, 2, DIR + 'sensor.png');
+                        linksTable.setCell(49, 3, 'line');
+                    } else {
+                        nodesTable.setCell(50, 2, DIR + 'sensorON.PNG');
+                        linksTable.setCell(49, 3, 'moving-arrows');
+
+                        if (data.light * 1 > 700 || data.light * 1 < 150) {
+                            nodesTable.setCell(50, 2, DIR + 'sensorOFF.PNG');
+                        }
+                    }
+
+                    if (data.alcohol_gas == "null") {
+                        nodesTable.setCell(55, 2, DIR + 'sensor.png');
+                        linksTable.setCell(50, 3, 'line');
+                    } else {
+                        nodesTable.setCell(55, 2, DIR + 'sensorON.PNG');
+                        linksTable.setCell(50, 3, 'moving-arrows');
+
+                        if (data.alcohol_gas * 1 > 150) {
+                            nodesTable.setCell(55, 2, DIR + 'sensorOFF.PNG');
+                        }
+                    }
+
+                    if (data.longitude == "null" || data.latitude == "null") {
+                        nodesTable.setCell(56, 2, DIR + 'sensor.png');
+                        linksTable.setCell(51, 3, 'line');
+                    } else {
+                        nodesTable.setCell(56, 2, DIR + 'sensorON.PNG');
+                        linksTable.setCell(51, 3, 'moving-arrows');
+                    }
+
+
+                    if (data.co_gas == "null") {
+                        nodesTable.setCell(57, 2, DIR + 'sensor.png');
+                        linksTable.setCell(58, 3, 'line');
+                    } else {
+                        nodesTable.setCell(57, 2, DIR + 'sensorON.PNG');
+                        linksTable.setCell(52, 3, 'moving-arrows');
+
+                        if (data.co_gas * 1 > 300) {
+                            nodesTable.setCell(57, 2, DIR + 'sensorOFF.PNG');
+                        }
+                    }
+                    network.draw(nodesTable, linksTable, options);
+		}
+	   });
+
             socket.on("GIST01rasp", function (data) {
                 console.log(data);
                 if (data == null) {
@@ -779,7 +933,7 @@
 
                 } else {
 
-                    //지스트 TYPE 0 - 전남대 라즈베리파이 링크
+                    //전남대 TYPE 0 - 전남대 라즈베리파이 링크
                     linksTable.setCell(17, 3, 'moving-arrows');
 
                     if (data.temp == "null") {
@@ -843,105 +997,6 @@
 
                         if (data.co_gas * 1 > 300) {
                             nodesTable.setCell(41, 2, DIR + 'sensorOFF.PNG');
-                        }
-                    }
-                    network.draw(nodesTable, linksTable, options);
-                }
-            });
-
-
-
-
-            socket.on("JEJU01rasp", function (data) {
-                console.log(data);
-                if (data == null) {
-
-                    //지스트 TYPE 0 - 지스트 라즈베리파이 링크
-                    linksTable.setCell(46, 3, 'line');
-
-                    nodesTable.setCell(48, 2, DIR + 'sensor.png');
-                    nodesTable.setCell(49, 2, DIR + 'sensor.png');
-                    nodesTable.setCell(50, 2, DIR + 'sensor.png');
-                    nodesTable.setCell(55, 2, DIR + 'sensor.png');
-                    nodesTable.setCell(56, 2, DIR + 'sensor.png');
-                    nodesTable.setCell(57, 2, DIR + 'sensor.png');
-
-                    linksTable.setCell(47, 3, 'line');
-                    linksTable.setCell(48, 3, 'line');
-                    linksTable.setCell(49, 3, 'line');
-                    linksTable.setCell(50, 3, 'line');
-                    linksTable.setCell(51, 3, 'line');
-                    linksTable.setCell(52, 3, 'line');
-
-                    network.draw(nodesTable, linksTable, options);
-
-                } else {
-
-                    //지스트 TYPE 0 - 전남대 라즈베리파이 링크
-                    linksTable.setCell(17, 3, 'moving-arrows');
-
-                    if (data.temp == "null") {
-                        nodesTable.setCell(48, 2, DIR + 'sensor.png');
-                        linksTable.setCell(47, 3, 'line');
-                    } else {
-                        nodesTable.setCell(48, 2, DIR + 'sensorON.PNG');
-                        linksTable.setCell(47, 3, 'moving-arrows');
-                    }
-
-                    if (data.dust == "null") {
-                        nodesTable.setCell(49, 2, DIR + 'sensor.png');
-                        linksTable.setCell(48, 3, 'line');
-                    } else {
-                        nodesTable.setCell(49, 2, DIR + 'sensorON.PNG');
-                        linksTable.setCell(48, 3, 'moving-arrows');
-
-                        if (data.dust * 1 > 200) {
-                            nodesTable.setCell(49, 2, DIR + 'sensorOFF.PNG');
-                        }
-                    }
-
-                    if (data.light == "null") {
-                        nodesTable.setCell(50, 2, DIR + 'sensor.png');
-                        linksTable.setCell(49, 3, 'line');
-                    } else {
-                        nodesTable.setCell(50, 2, DIR + 'sensorON.PNG');
-                        linksTable.setCell(49, 3, 'moving-arrows');
-
-                        if (data.light * 1 > 700 || data.light * 1 < 150) {
-                            nodesTable.setCell(50, 2, DIR + 'sensorOFF.PNG');
-                        }
-                    }
-
-                    if (data.alcohol_gas == "null") {
-                        nodesTable.setCell(55, 2, DIR + 'sensor.png');
-                        linksTable.setCell(50, 3, 'line');
-                    } else {
-                        nodesTable.setCell(55, 2, DIR + 'sensorON.PNG');
-                        linksTable.setCell(50, 3, 'moving-arrows');
-
-                        if (data.alcohol_gas * 1 > 150) {
-                            nodesTable.setCell(55, 2, DIR + 'sensorOFF.PNG');
-                        }
-                    }
-
-                    if (data.longitude == "null" || data.latitude == "null") {
-                        nodesTable.setCell(56, 2, DIR + 'sensor.png');
-                        linksTable.setCell(51, 3, 'line');
-                    } else {
-                        nodesTable.setCell(56, 2, DIR + 'sensorON.PNG');
-                        linksTable.setCell(51, 3, 'moving-arrows');
-                    }
-
-
-                    if (data.co_gas == "null") {
-                        nodesTable.setCell(57, 2, DIR + 'sensor.png');
-                        linksTable.setCell(58, 3, 'line');
-                    } else {
-                        nodesTable.setCell(57, 2, DIR + 'sensorON.PNG');
-                        linksTable.setCell(52, 3, 'moving-arrows');
-
-                        if (data.co_gas * 1 > 300) {
-                            nodesTable.setCell(57, 2, DIR + 'sensorOFF.PNG');
                         }
                     }
                     network.draw(nodesTable, linksTable, options);

@@ -10,10 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "express": "4.15.3",
+    "eyes": "^0.1.8",
     "influx": "5.0.7",
     "networkjs": "^0.1.1",
     "path": "^0.12.7",
-    "rtmpdump": "^0.1.1",
-    "socket.io": "2.0.3"
+    "socket.io": "2.0.3",
+    "xml2js": "^0.4.19",
+    "xmldom": "^0.1.27",
+    "xpath": "0.0.24"
   }
 }

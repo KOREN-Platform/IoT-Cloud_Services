@@ -4,6 +4,13 @@ const path = require('path');
 var server = require('http').createServer(app);
 // http server를 socket.io server로 upgrade한다
 var io = require('socket.io')(server);
+var eye = require('eyes');
+var http = require('http');
+var fs = require('fs');
+var xml2js = require('xml2js');
+var parser = new xml2js.Parser();
+var xpath = require('xpath');
+var dom = require('xmldom').DOMParser;
 
 // InfluxDB
 var DB = new influx.InfluxDB({
@@ -98,12 +105,10 @@ io.on('connection', function (socket) {
         limit 1
       `).then(result => {
             if (result[0] != undefined)
-                raspIsOn4 = true;
+            	socket.emit('KU01phone', null);
             else
-                raspIsOn4 = false;
             socket.emit('KU01phone', result[0]);
-        }).catch(err => {
-            raspIsOn4 = false;
+        }).catch(err => {     
             socket.emit('KU01phone', null)
         })
 
@@ -114,12 +119,10 @@ io.on('connection', function (socket) {
         limit 1
       `).then(result => {
             if (result[0] != undefined)
-                raspIsOn5 = true;
+                socket.emit('KU02demo', null);
             else
-                raspIsOn5 = false;
             socket.emit('KU02demo', result[0]);
         }).catch(err => {
-            raspIsOn5 = false;
             socket.emit('KU02demo', null)
         })
 
@@ -131,12 +134,10 @@ io.on('connection', function (socket) {
         limit 1
       `).then(result => {
             if (result[0] != undefined)
-                raspIsOn6 = true;
+                socket.emit('GIST01rasp', null)
             else
-                raspIsOn6 = false;
             socket.emit('GIST01rasp', result[0]);
         }).catch(err => {
-            raspIsOn6 = false;
             socket.emit('GIST01rasp', null)
         })
 
@@ -147,12 +148,10 @@ io.on('connection', function (socket) {
         limit 1
       `).then(result => {
             if (result[0] != undefined)
-                raspIsOn7 = true;
+           socket.emit('JEJU01rasp', null)
             else
-                raspIsOn7 = false;
             socket.emit('JEJU01rasp', result[0]);
         }).catch(err => {
-            raspIsOn7 = false;
             socket.emit('JEJU01rasp', null)
         })
     })
@@ -178,7 +177,7 @@ io.on('connection', function (socket) {
                 socket.volatile.emit('JNU01rasp', null)
             })
         });
-    }, 3000);
+    }, 5000);
 
     var tweets2 = setInterval(function () {
         getBieberTweet(function (tweet) {
@@ -199,7 +198,7 @@ io.on('connection', function (socket) {
                 socket.volatile.emit('JNU02drone', null)
             })
         });
-    }, 3000);
+    }, 5000);
 
     var tweets3 = setInterval(function () {
         getBieberTweet(function (tweet) {
@@ -220,7 +219,7 @@ io.on('connection', function (socket) {
                 socket.volatile.emit('JNU03demo', null)
             })
         });
-    }, 3000);
+    }, 5000);
 
 
     var tweets4 = setInterval(function () {
@@ -233,18 +232,16 @@ io.on('connection', function (socket) {
       `).then(result => {
                 //console.log("kusensor(phone) : " + raspIsOn4, result[0]);
 
-                if (raspIsOn4 && result[0] == undefined) {
+                if ( result[0] == undefined) {
                     socket.volatile.emit('KU01phone', null);
-                    raspIsOn4 = false;
-                } else if (!raspIsOn4 && result[0] != undefined) {
+                } else if ( result[0] != undefined) {
                     socket.volatile.emit('KU01phone', result[0]);
-                    raspIsOn4 = true;
                 }
             }).catch(err => {
                 socket.volatile.emit('KU01phone', null)
             })
         });
-    }, 3000);
+    }, 5000);
 
 
     var tweets5 = setInterval(function () {
@@ -257,18 +254,16 @@ io.on('connection', function (socket) {
       `).then(result => {
                 //console.log("kusensor(demo) : " + raspIsOn5, result[0]);
 
-                if (raspIsOn5 && result[0] == undefined) {
+                if (result[0] == undefined) {
                     socket.volatile.emit('KU01demo', null);
-                    raspIsOn5 = false;
-                } else if (!raspIsOn5 && result[0] != undefined) {
+                } else if (result[0] != undefined) {
                     socket.volatile.emit('KU01demo', result[0]);
-                    raspIsOn5 = true;
                 }
             }).catch(err => {
                 socket.volatile.emit('KU01demo', null)
             })
         });
-    }, 3000);
+    }, 5000);
     
      var tweets6 = setInterval(function () {
         getBieberTweet(function (tweet) {
@@ -280,18 +275,16 @@ io.on('connection', function (socket) {
       `).then(result => {
              
 
-                if (raspIsOn6 && result[0] == undefined) {
+                if ( result[0] == undefined) {
                     socket.volatile.emit('GIST01rasp', null);
-                    raspIsOn6 = false;
-                } else if (!raspIsOn6 && result[0] != undefined) {
+                } else if ( result[0] != undefined) {
                     socket.volatile.emit('GIST01rasp', result[0]);
-                    raspIsOn6 = true;
                 }
             }).catch(err => {
                 socket.volatile.emit('GIST01rasp', null)
             })
         });
-    }, 3000);
+    }, 5000);
     
      var tweets7 = setInterval(function () {
         getBieberTweet(function (tweet) {
@@ -303,34 +296,69 @@ io.on('connection', function (socket) {
       `).then(result => {
                 
 
-                if (raspIsOn7 && result[0] == undefined) {
+                if (result[0] == undefined) {
                     socket.volatile.emit('JEJU01rasp', null);
-                    raspIsOn7 = false;
-                } else if (!raspIsOn7 && result[0] != undefined) {
+                } else if (result[0] != undefined) {
                     socket.volatile.emit('JEJU01rasp', result[0]);
-                    raspIsOn7 = true;
                 }
             }).catch(err => {
                 socket.volatile.emit('JEJU01rasp', null)
             })
         });
-    }, 3000);
+    }, 5000);
 
 
     var videoTweets1 = setInterval(function () {
 	getBieberTweet(function (tweet) {
-	
+	var data = '';	
+	var isTrue = false;
+	 http.get('http://168.131.161.200:1936/stat.xml', function(res) {
+     	if (res.statusCode >= 200 && res.statusCode < 400) {
+       	res.on('data', function(data_) { data += data_.toString(); });
+       	res.on('end', function() {
+
+        var doc = new dom().parseFromString(data);
+
+        var streams = xpath.select("//live/stream/name",doc);
+        for(var i = 0 ; i < streams.length ; i++){
+        if(streams[i].firstChild.data == 'jnu2')
+	isTrue = true;
+        }
+	socket.volatile.emit('JNUCAM', isTrue)
+	});
+     }
+   });
+
 
 	});
-    }, 3000);
+    }, 5000);
     
 
     var videoTweets2 = setInterval(function () {
         getBieberTweet(function (tweet) {
+	
+	var data = '';
+        var isTrue = false;
+         http.get('http://168.131.161.200:1936/stat.xml', function(res) {
+        if (res.statusCode >= 200 && res.statusCode < 400) {
+        res.on('data', function(data_) { data += data_.toString(); });
+        res.on('end', function() {
+
+        var doc = new dom().parseFromString(data);
+
+        var streams = xpath.select("//live/stream/name",doc);
+        for(var i = 0 ; i < streams.length ; i++){
+        if(streams[i].firstChild.data == 'ku')
+        isTrue = true;
+        }
+        socket.volatile.emit('KUCAM', isTrue)
+        });
+     }
+   });
 
 
         });
-    }, 3000);
+    }, 5000);
     
 
     // force client disconnect from server

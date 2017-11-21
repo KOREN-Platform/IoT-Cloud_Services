@@ -13,6 +13,7 @@
     "influx": "5.0.7",
     "networkjs": "^0.1.1",
     "path": "^0.12.7",
+    "rtmpdump": "^0.1.1",
     "socket.io": "2.0.3"
   }
 }

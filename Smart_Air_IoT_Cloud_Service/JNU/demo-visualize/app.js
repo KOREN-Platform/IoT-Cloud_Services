@@ -16,11 +16,13 @@ var DB = new influx.InfluxDB({
     database: 'station'
 });
 
-let raspIsOn1 = false;
 let raspIsOn2 = false;
 let raspIsOn3 = false;
 let raspIsOn4 = false;
 let raspIsOn5 = false;
+let raspIsOn6 = false;
+let raspIsOn7 = false;
+
 
 function getBieberTweet(cb) {
     cb('check out');
@@ -37,6 +39,7 @@ app.use('/img/', require('express').static(path.join(__dirname, '/img'), {maxAge
 app.use('/html/', require('express').static(path.join(__dirname, '/html'), {maxAge: 259200000}))
 
 
+
 // connection event handler
 // connection이 수립되면 event handler function의 인자로 socket인 들어온다
 io.on('connection', function (socket) {
@@ -49,13 +52,12 @@ io.on('connection', function (socket) {
         order by time desc
         limit 1
       `).then(result => {
+	console.log(result[0])
             if (result[0] != undefined)
-                raspIsOn1 = true;
+                socket.emit('JNU01rasp', null);
             else
-                raspIsOn1 = false;
-            socket.emit('JNU01rasp', result[0]);
+		socket.emit('JNU01rasp', result[0]);
         }).catch(err => {
-            raspIsOn1 = false;
             socket.emit('JNU01rasp', null)
         })
 
@@ -66,12 +68,10 @@ io.on('connection', function (socket) {
         limit 1
       `).then(result => {
             if (result[0] != undefined)
-                raspIsOn2 = true;
+                socket.emit('JNU02drone', null);
             else
-                raspIsOn2 = false;
-            socket.emit('JNU02drone', result[0]);
+            	socket.emit('JNU02drone', result[0]);
         }).catch(err => {
-            raspIsOn2 = false;
             socket.emit('JNU02drone', null)
         })
 
@@ -83,12 +83,10 @@ io.on('connection', function (socket) {
         limit 1
       `).then(result => {
             if (result[0] != undefined)
-                raspIsOn3 = true;
-            else
-                raspIsOn3 = false;
-            socket.emit('JNU03demo', result[0]);
+            	socket.emit('JNU03demo', null);
+	    else
+            	socket.emit('JNU03demo', result[0]);
         }).catch(err => {
-            raspIsOn3 = false;
             socket.emit('JNU03demo', null)
         })
 
@@ -125,6 +123,38 @@ io.on('connection', function (socket) {
             socket.emit('KU02demo', null)
         })
 
+
+        DB.query(`
+        select * from GIST01_rasp
+        where time > now() - 5s
+        order by time desc
+        limit 1
+      `).then(result => {
+            if (result[0] != undefined)
+                raspIsOn6 = true;
+            else
+                raspIsOn6 = false;
+            socket.emit('GIST01rasp', result[0]);
+        }).catch(err => {
+            raspIsOn6 = false;
+            socket.emit('GIST01rasp', null)
+        })
+
+        DB.query(`
+        select * from JEJU01_rasp
+        where time > now() - 5s
+        order by time desc
+        limit 1
+      `).then(result => {
+            if (result[0] != undefined)
+                raspIsOn7 = true;
+            else
+                raspIsOn7 = false;
+            socket.emit('JEJU01rasp', result[0]);
+        }).catch(err => {
+            raspIsOn7 = false;
+            socket.emit('JEJU01rasp', null)
+        })
     })
 
 
@@ -139,18 +169,16 @@ io.on('connection', function (socket) {
       `).then(result => {
                 //console.log("jnusensor(rasp) : " + raspIsOn1,result[0]);
 
-                if (raspIsOn1 && result[0] == undefined) {
+                if (result[0] == undefined) {
+                    socket.volatile.emit('JNU01rasp', null);
+                } else if (result[0] != undefined) {
                     socket.volatile.emit('JNU01rasp', result[0]);
-                    raspIsOn1 = false;
-                } else if (!raspIsOn1 && result[0] != undefined) {
-                    socket.volatile.emit('JNU01rasp', result[0]);
-                    raspIsOn1 = true;
                 }
             }).catch(err => {
                 socket.volatile.emit('JNU01rasp', null)
             })
         });
-    }, 5000);
+    }, 3000);
 
     var tweets2 = setInterval(function () {
         getBieberTweet(function (tweet) {
@@ -160,20 +188,18 @@ io.on('connection', function (socket) {
         order by time desc
         limit 1
       `).then(result => {
-               // console.log("jnusensor2(drone) : " + raspIsOn2, result[0]);
+                // console.log("jnusensor2(drone) : " + raspIsOn2, result[0]);
 
-                if (raspIsOn2 && result[0] == undefined) {
+                if (result[0] == undefined) {
+                    socket.volatile.emit('JNU02drone', null);
+                } else if (result[0] != undefined) {
                     socket.volatile.emit('JNU02drone', result[0]);
-                    raspIsOn2 = false;
-                } else if (!raspIsOn2 && result[0] != undefined) {
-                    socket.volatile.emit('JNU02drone', result[0]);
-                    raspIsOn2 = true;
                 }
             }).catch(err => {
                 socket.volatile.emit('JNU02drone', null)
             })
         });
-    }, 5000);
+    }, 3000);
 
     var tweets3 = setInterval(function () {
         getBieberTweet(function (tweet) {
@@ -185,18 +211,16 @@ io.on('connection', function (socket) {
       `).then(result => {
                 //console.log("jnusensor3(demo) : " + raspIsOn3, result[0]);
 
-                if (raspIsOn3 && result[0] == undefined) {
+                if (result[0] == undefined) {
+                    socket.volatile.emit('JNU03demo', null);
+                } else if (result[0] != undefined) {
                     socket.volatile.emit('JNU03demo', result[0]);
-                    raspIsOn3 = false;
-                } else if (!raspIsOn3 && result[0] != undefined) {
-                    socket.volatile.emit('JNU03demo', result[0]);
-                    raspIsOn3 = true;
                 }
             }).catch(err => {
                 socket.volatile.emit('JNU03demo', null)
             })
         });
-    }, 5000);
+    }, 3000);
 
 
     var tweets4 = setInterval(function () {
@@ -210,7 +234,7 @@ io.on('connection', function (socket) {
                 //console.log("kusensor(phone) : " + raspIsOn4, result[0]);
 
                 if (raspIsOn4 && result[0] == undefined) {
-                    socket.volatile.emit('KU01phone', result[0]);
+                    socket.volatile.emit('KU01phone', null);
                     raspIsOn4 = false;
                 } else if (!raspIsOn4 && result[0] != undefined) {
                     socket.volatile.emit('KU01phone', result[0]);
@@ -220,7 +244,7 @@ io.on('connection', function (socket) {
                 socket.volatile.emit('KU01phone', null)
             })
         });
-    }, 5000);
+    }, 3000);
 
 
     var tweets5 = setInterval(function () {
@@ -234,7 +258,7 @@ io.on('connection', function (socket) {
                 //console.log("kusensor(demo) : " + raspIsOn5, result[0]);
 
                 if (raspIsOn5 && result[0] == undefined) {
-                    socket.volatile.emit('KU01demo', result[0]);
+                    socket.volatile.emit('KU01demo', null);
                     raspIsOn5 = false;
                 } else if (!raspIsOn5 && result[0] != undefined) {
                     socket.volatile.emit('KU01demo', result[0]);
@@ -244,7 +268,70 @@ io.on('connection', function (socket) {
                 socket.volatile.emit('KU01demo', null)
             })
         });
-    }, 5000);
+    }, 3000);
+    
+     var tweets6 = setInterval(function () {
+        getBieberTweet(function (tweet) {
+            DB.query(`
+        select * from GIST01_rasp
+        where time > now() - 5s
+        order by time desc
+        limit 1
+      `).then(result => {
+             
+
+                if (raspIsOn6 && result[0] == undefined) {
+                    socket.volatile.emit('GIST01rasp', null);
+                    raspIsOn6 = false;
+                } else if (!raspIsOn6 && result[0] != undefined) {
+                    socket.volatile.emit('GIST01rasp', result[0]);
+                    raspIsOn6 = true;
+                }
+            }).catch(err => {
+                socket.volatile.emit('GIST01rasp', null)
+            })
+        });
+    }, 3000);
+    
+     var tweets7 = setInterval(function () {
+        getBieberTweet(function (tweet) {
+            DB.query(`
+        select * from JEJU01_rasp
+        where time > now() - 5s
+        order by time desc
+        limit 1
+      `).then(result => {
+                
+
+                if (raspIsOn7 && result[0] == undefined) {
+                    socket.volatile.emit('JEJU01rasp', null);
+                    raspIsOn7 = false;
+                } else if (!raspIsOn7 && result[0] != undefined) {
+                    socket.volatile.emit('JEJU01rasp', result[0]);
+                    raspIsOn7 = true;
+                }
+            }).catch(err => {
+                socket.volatile.emit('JEJU01rasp', null)
+            })
+        });
+    }, 3000);
+
+
+    var videoTweets1 = setInterval(function () {
+	getBieberTweet(function (tweet) {
+	
+
+	});
+    }, 3000);
+    
+
+    var videoTweets2 = setInterval(function () {
+        getBieberTweet(function (tweet) {
+
+
+        });
+    }, 3000);
+    
 
     // force client disconnect from server
     socket.on('forceDisconnect', function () {
@@ -254,6 +341,10 @@ io.on('connection', function (socket) {
         clearInterval(tweets3);
         clearInterval(tweets4);
         clearInterval(tweets5);
+        clearInterval(tweets6);
+        clearInterval(tweets7);
+	clearInterval(videoTweets1);
+	clearInterval(videoTweets2);
     })
 
     socket.on('disconnect', function () {
@@ -262,6 +353,10 @@ io.on('connection', function (socket) {
         clearInterval(tweets3);
         clearInterval(tweets4);
         clearInterval(tweets5);
+        clearInterval(tweets6);
+        clearInterval(tweets7);
+	clearInterval(videoTweets1);
+	clearInterval(videoTweets2);
         console.log('user disconnected: ' + socket.name);
     });
 });
@@ -269,6 +364,3 @@ io.on('connection', function (socket) {
 server.listen(4000, function () {
     console.log('Socket IO server listening on port 4000');
 });
-
-
-

@@ -1,55 +1,48 @@
+<!DOCTYPE html>
 <html>
-        <head>
-                <title>
-                        iFrame연습
-                </title>
-        </head>
-        <body >
-<div id="video-jwplayer_wrapper" style="position:relative; display:block; width:960px; height:540px;">
-<object type="application/x-shockwave-flash" data="./jwplayer/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" id="video-jwplayer" name="video-jwplayer" tabindex="0">
-<param name="allowfullscreen" value="true">
-<param name="allowscriptaccess" value="always">
-<param name="seamlesstabbing" value="true">
-<param name="wmode" value="opaque">
-</object>
-<div id="video-jwplayer_aspect" style="display:none;"></div>
-<div id="video-jwplayer_jwpsrv" style="position:absolute; top:opx; z-index:10;"></div>
-</div>
+<head>
+  <title>RTMP Player</title>
 
-<script src="./jwplayer/jwplayer.js"></script>
-<script>jwplayer.key="ANMwaJKCHbmYxjqGIUi2jA7tw25nxb9Ut2+b/A==";</script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
-<script type="text/javascript">
-jwplayer('video-jwplayer').setup({
-flashplayer:"./jwplayer/jwplayer.flash.swf"
-,file:"rtmp://203.255.250.196:1935/livetest/KUPhone"
-,autoStart:true
-,rtmp:{
-bufferlength:0.1
-}
-,deliveryType:"streaming"
-,width:385
-,height:518
-,player:{
-modes:{
-linear:{
-controls:{
-stream:{
-manage:false
-,enabled:false
-}
-}
-}
-}
-}
-,shows:{
-streamTimer:{
-enabled:true
-,tickRate:100
-}
-}
-});
-</script>
+  <!-- Flowplayer -->
+  <script src="http://releases.flowplayer.org/js/flowplayer-3.2.13.min.js"></script>
 
-        </body>
+  <!-- JWPlayer -->
+  <script src="http://jwpsrv.com/library/sq8RfmIXEeOtdhIxOQfUww.js"></script>
+
+</head>
+<body>
+
+  <div style="vertical-align: top; display: inline-block; margin-right: 50px;">
+  <a id="rtmpplayer" style="position:relative; display:block; width:960px; height:540px;;">
+  </a>
+  </div>
+
+
+  <script>
+  flowplayer("rtmpplayer", "http://releases.flowplayer.org/swf/flowplayer-3.2.18.swf", {
+    plugins: {
+      subscribe: true,
+      rtmp: {
+        url: "http://releases.flowplayer.org/swf/flowplayer.rtmp-3.2.13.swf"
+      }
+    },
+    clip: {
+      provider: 'rtmp',
+      url: "rtmp://203.255.250.196:1935/livetest/KUPhone",
+      rtmpSubscribe: true,
+      autoPlay: true,
+      live: true
+    },
+    log: {
+      level: 'debug',
+      filter: 'org.flowplayer.rtmp.*'
+    }
+  });
+  </script>
+
+</body>
 </html>
+

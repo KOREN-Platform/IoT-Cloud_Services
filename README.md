@@ -1,4 +1,4 @@
-![](https://github.com/KOREN-Platform/Services/blob/master/Images/services_home.PNG)
+![](https://github.com/KOREN-Platform/IoT-Cloud_Services/blob/master/Images/services_home.PNG)
 
 # Services
 
